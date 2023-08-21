@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSmsGatewaysTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateSmsGatewaysTable extends Migration
      */
     public function up()
     {
-        Schema::create('sms_gateways', function (Blueprint $table) {
-            $table->id();
-            $table->string('name',70)->nullable();
-            $table->string('alias',70)->nullable();
-            $table->text('credentials')->nullable();
+        Schema::create('seat_layouts', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('layout', 40)->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateSmsGatewaysTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sms_gateways');
+        Schema::dropIfExists('seat_layouts');
     }
-}
+};

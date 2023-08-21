@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTicketPriceByStoppagesTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -14,10 +14,10 @@ class CreateTicketPriceByStoppagesTable extends Migration
     public function up()
     {
         Schema::create('ticket_price_by_stoppages', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->unsignedInteger('ticket_price_id')->default(0);
-            $table->string('source_destination', 50)->nullable();
-            $table->double('price', 8,2)->default(0);
+            $table->string('source_destination', 40)->nullable();
+            $table->double('price', 8, 2)->default(0);
             $table->timestamps();
         });
     }
@@ -31,4 +31,4 @@ class CreateTicketPriceByStoppagesTable extends Migration
     {
         Schema::dropIfExists('ticket_price_by_stoppages');
     }
-}
+};

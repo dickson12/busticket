@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCountersTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateCountersTable extends Migration
      */
     public function up()
     {
-        Schema::create('counters', function (Blueprint $table) {
-            $table->id();
-            $table->string('name', 255)->nullable();
-            $table->string('city', 40)->nullable();
-            $table->string('location', 255)->nullable();
-            $table->string('mobile', 40)->nullable();
+        Schema::create('assigned_vehicles', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedInteger('trip_id')->default(0);
+            $table->unsignedInteger('vehicle_id')->default(0);
+            $table->time('start_from')->nullable();
+            $table->time('end_at')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
@@ -31,6 +31,6 @@ class CreateCountersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('counters');
+        Schema::dropIfExists('assigned_vehicles');
     }
-}
+};
