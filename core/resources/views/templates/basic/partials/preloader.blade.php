@@ -1,5 +1,5 @@
 <!-- Preloader -->
-<div class="preloader">
+{{--<div class="preloader">
     <div class="loader-wrapper">
         <div class="truck-wrapper">
             <div class="preloader-content">{{ __($general->sitename) }}</div>
@@ -17,5 +17,5 @@
             </div>
         </div>
     </div>
-</div>
+</div>--}}
 <!-- Preloader -->

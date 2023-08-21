@@ -12,7 +12,7 @@
                 <div class="account-header">
                     <div class="left-content">
                         <div class="logo mb-4">
-                            <a href="{{ route('home') }}"><img src="{{ getImage(imagePath()['logoIcon']['path'].'/logo.png') }}" alt="Logo"></a>
+                            <a href="{{ route('home') }}"><img src="{{getImage(imagePath()['logoIcon']['path'] .'/KIbubuWhite.png')}}"  alt="Logo"></a>
                         </div>
                          <h3 class="title">{{ __(@$content->data_values->heading) }}</h3>
                         <span>{{ __(@$content->data_values->sub_heading) }}</span>

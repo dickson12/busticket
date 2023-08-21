@@ -43,7 +43,7 @@
                 </div>
             </div>
         </div>
-        <div class="row gy-5">
+        {{--<div class="row gy-5">
             <div class="col-lg-6">
                 <div class="contact-form-wrapper">
                     <h4 class="title mb-4">{{ @$content->data_values->form_title }}</h4>
@@ -87,7 +87,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>--}}
 </section>
 
 

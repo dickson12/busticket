@@ -1,7 +1,7 @@
 @extends($activeTemplate.'layouts.frontend')
 @section('content')
 
-<section class="privacy-policy padding-top padding-bottom">
+{{--<section class="privacy-policy padding-top padding-bottom">
     <div class="container">
         <div class="row gy-5">
             <div class="col-lg-12">
@@ -15,6 +15,6 @@
             </div>
         </div>
     </div>
-</section>
+</section>--}}
 
 @endsection

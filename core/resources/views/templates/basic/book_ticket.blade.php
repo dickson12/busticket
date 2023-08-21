@@ -55,10 +55,10 @@
                                     <input id="female" type="radio" name="gender" value="2">
                                     <label class="form-label" for="female">@lang('Female')</label>
                                 </div>
-                                <div class="form-group custom--radio">
+                                {{--<div class="form-group custom--radio">
                                     <input id="other" type="radio" name="gender" value="3">
                                     <label class="form-label" for="other">@lang('Other')</label>
-                                </div>
+                                </div>--}}
                             </div>
                         </div>
 

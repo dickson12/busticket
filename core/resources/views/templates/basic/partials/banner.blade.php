@@ -6,13 +6,10 @@ $counters = App\Models\Counter::get();
 <section class="banner-section" style="background: url({{ getImage('assets/images/frontend/banner/'.$contents->data_values->background_image, "1500x88") }}) repeat-x bottom;">
     <div class="container">
         <div class="banner-wrapper">
-            <div class="banner-content">
-                <h1 class="title">{{ __($contents->data_values->heading) }}</h1>
-                <a href="{{ __(@$contents->data_values->link) }}" class="cmn--btn">{{ __(@$contents->data_values->link_title) }}</a>
-            </div>
+           
             <div class="ticket-form-wrapper">
                 <div class="ticket-header nav-tabs nav border-0">
-                    <h4 class="title">@lang('Choose Your Ticket')</h4>
+                    <h4 class="title">@lang('Select Route and Date:')</h4>
                 </div>
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="one-way">
@@ -21,7 +18,7 @@ $counters = App\Models\Counter::get();
                                 <div class="form--group">
                                     <i class="las la-location-arrow"></i>
                                     <select class="form--control select2" name="pickup">
-                                        <option value="">@lang('Pickup Point')</option>
+                                        <option value="">@lang('Origin')</option>
                                         @foreach ($counters as $counter)
                                         <option value="{{ $counter->id }}" @if(request()->pickup == $counter->id) selected @endif>{{ __($counter->name) }}</option>
                                         @endforeach
@@ -32,7 +29,7 @@ $counters = App\Models\Counter::get();
                                 <div class="form--group">
                                     <i class="las la-map-marker"></i>
                                     <select name="destination" class="form--control select2">
-                                        <option value="">@lang('Dropping Point')</option>
+                                        <option value="">@lang('Destination')</option>
                                         @foreach ($counters as $counter)
                                         <option value="{{ $counter->id }}" @if(request()->destination == $counter->id) selected @endif>{{ __($counter->name) }}</option>
                                         @endforeach
@@ -42,22 +39,26 @@ $counters = App\Models\Counter::get();
                             <div class="col-md-12">
                                 <div class="form--group">
                                     <i class="las la-calendar-check"></i>
-                                    <input type="text" name="date_of_journey" class="form--control datepicker" placeholder="@lang('Departure Date')" autocomplete="off">
+                                    <input type="text" name="date_of_journey" class="form--control datepicker"  placeholder="@lang('Departure Date')" autocomplete="off">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form--group">
-                                    <button>@lang('Find Tickets')</button>
+                                    <button>@lang('Search Buses')</button>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
+            <div class="banner-content">
+                <h1 class="title"><br>{{ __($contents->data_values->heading) }}</h1>
+               {{-- <a href="{{ __(@$contents->data_values->link) }}" class="cmn--btn">{{ __(@$contents->data_values->link_title) }}</a>--}}
+            </div>
         </div>
     </div>
     <div class="shape">
-        <img src="{{ getImage('assets/images/frontend/banner/'.$contents->data_values->animation_image, "200x69") }}" alt="bg">
+    {{-- <img src="{{ getImage('assets/images/frontend/banner/'.$contents->data_values->animation_image, "200x69") }}" alt="bg">--}}
     </div>
 </section>
 <!-- Banner Section Ends Here -->

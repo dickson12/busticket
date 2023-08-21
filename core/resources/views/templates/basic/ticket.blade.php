@@ -11,7 +11,7 @@ $counters = App\Models\Counter::get();
                     <div class="form--group">
                         <i class="las la-location-arrow"></i>
                         <select name="pickup" class="form--control select2">
-                            <option value="">@lang('Pickup Point')</option>
+                            <option value="">@lang('Origin')</option>
                             @foreach ($counters as $counter)
                             <option value="{{ $counter->id }}" @if(request()->pickup == $counter->id) selected @endif>{{ __($counter->name) }}</option>
                             @endforeach
@@ -22,7 +22,7 @@ $counters = App\Models\Counter::get();
                     <div class="form--group">
                         <i class="las la-map-marker"></i>
                         <select name="destination" class="form--control select2">
-                            <option value="">@lang('Dropping Point')</option>
+                            <option value="">@lang('Destination')</option>
                             @foreach ($counters as $counter)
                             <option value="{{ $counter->id }}" @if(request()->destination == $counter->id) selected @endif>{{ __($counter->name) }}</option>
                             @endforeach
@@ -37,7 +37,7 @@ $counters = App\Models\Counter::get();
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <div class="form--group">
-                        <button>@lang('Find Tickets')</button>
+                        <button>@lang('Search Buses')</button>
                     </div>
                 </div>
             </form>
@@ -51,8 +51,17 @@ $counters = App\Models\Counter::get();
 <section class="ticket-section padding-bottom section-bg">
     <div class="container">
         <div class="row gy-5">
-            <div class="col-lg-3">
-                <form action="{{ route('search') }}" id="filterForm">
+            <!-- Filter Toggle Button Container -->
+            <div class="buttonSection col-lg-12 d-flex justify-content-end mb-3">
+            <button id="filterToggleButton" class="btn btn-primary" style="width: 150px; padding: 10px 15px;">
+                    <i class="las la-filter"></i> Filter
+                </button>
+            </div>
+
+            <div class="col-lg-12">
+                <!-- Filter Section -->
+                <div id="filterSection"> <!-- Initially hidden -->
+                    <form action="{{ route('search') }}" id="filterForm">
                     <div class="ticket-filter">
                         <div class="filter-header filter-item">
                             <h4 class="title mb-0">@lang('Filter')</h4>
@@ -63,7 +72,7 @@ $counters = App\Models\Counter::get();
                             <h5 class="title">@lang('Vehicle Type')</h5>
                             <ul class="bus-type">
                                 @foreach ($fleetType as $fleet)
-                                <li class="custom--checkbox">
+                               <li class="custom--checkbox">
                                     <input name="fleetType[]" class="search" value="{{ $fleet->id }}" id="{{ $fleet->name }}" type="checkbox" @if (request()->fleetType)
                                     @foreach (request()->fleetType as $item)
                                     @if ($item == $fleet->id)
@@ -118,10 +127,12 @@ $counters = App\Models\Counter::get();
                         </div>
                         @endif
                     </div>
-                </form>
+                    </form>
+                </div>
             </div>
-            <div class="col-lg-9">
-                <div class="ticket-wrapper">
+
+            <div class="col-lg-12">
+            <div class="ticket-wrapper">
                     @forelse ($trips as $trip)
                     @php
                     $start = Carbon\Carbon::parse($trip->schedule->start_from);
@@ -131,39 +142,49 @@ $counters = App\Models\Counter::get();
                     @endphp
 
 
-                    <div class="ticket-item">
+                    <div class="ticket-item d-flex align-items-center">
                         <div class="ticket-item-inner">
-                            <h5 class="bus-name">{{ __($trip->title) }}</h5>
-                            <span class="bus-info">@lang('Seat Layout - ') {{ __($trip->fleetType->seat_layout) }}</span>
-                            <span class="ratting"><i class="las la-bus"></i>{{ __($trip->fleetType->name) }}</span>
+                        <h5 class="bus-name">LOGO</h5>
+                            {{--<h5 class="bus-name">{{ __($trip->title) }}</h5>--}}
+                            {{--<span class="bus-info">@lang('Seat Layout - ') {{ __($trip->fleetType->seat_layout) }}</span>--}}
+                            <span class="ratting">{{--<i class="las la-bus"></i>--}}{{ __($trip->fleetType->name) }}</span>
                         </div>
                         <div class="ticket-item-inner travel-time">
                             <div class="bus-time">
-                                <p class="time">{{ showDateTime($trip->schedule->start_from, 'h:i A') }}</p>
+                                <p class="time">{{ showDateTime($trip->schedule->start_from, 'h:i A') }} ({{ showDateTime($trip->schedule->start_from, 'h:i ') }})</p>
+                            </div>
+                        </div>
+                        <div class="ticket-item-inner travel-time d-flex align-items-center">
+                            <div class="bus-time">
+                                <i class="las la-location-arrow"></i> <!-- Origin Icon -->
                                 <p class="place">{{ __($trip->startFrom->name) }}</p>
                             </div>
-                            <div class=" bus-time">
-                                <i class="las la-arrow-right"></i>
-                                <p>{{ $diff->format('%H:%I min') }}</p>
-                            </div>
-                            <div class=" bus-time">
-                                <p class="time">{{ showDateTime($trip->schedule->end_at, 'h:i A') }}</p>
+                            <i class="las la-arrow-down connector-icon"></i> <!-- Connector Icon -->
+                            <div class="bus-time">
+                                <i class="las la-map-marker"></i> <!-- Destination Icon -->
                                 <p class="place">{{ __($trip->endTo->name) }}</p>
                             </div>
                         </div>
                         <div class="ticket-item-inner book-ticket">
                             <p class="rent mb-0">{{ __($general->cur_sym) }}{{ showAmount($ticket->price) }}</p>
-                            @if($trip->day_off)
-                            <div class="seats-left mt-2 mb-3 fs--14px">
-                                @lang('Off Days'): <div class="d-inline-flex flex-wrap" style="gap:5px">
+                            {{--    @if($trip->day_off)--}}
+                                
+                             
+                        </div>
+                        <div class="ticket-item-inner book-ticket">
+                            
+                            {{--    @if($trip->day_off)
+                                
+                             <div class="seats-left mt-2 mb-3 fs--14px">
+                             @lang('Off Days'): <div class="d-inline-flex flex-wrap" style="gap:5px">
                                     @foreach ($trip->day_off as $item)
-                                    <span class="badge badge--primary">{{ __(showDayOff($item)) }}</span>
+                                   <span class="badge badge--primary">{{ __(showDayOff($item)) }}</span>
                                     @endforeach
                                 </div>
                                 @else
                                 @lang('Every day available')
-                                @endif</div>
-                            <a class="btn btn--base" href="{{ route('ticket.seats', [$trip->id, slug($trip->title)]) }}">@lang('Select Seat')</a>
+                                @endif</div>--}}
+                            <a class="btn btn--base" href="{{ route('ticket.seats', [$trip->id, slug($trip->title)]) }}">@lang('SELECT')</a>
                         </div>
                         @if ($trip->fleetType->facilities)
                         <div class="ticket-item-footer">
@@ -191,11 +212,112 @@ $counters = App\Models\Counter::get();
         </div>
     </div>
 </section>
-@endsection
+
+
+
+<!-- Internal CSS -->
+<style>
+    #filterSection {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1050;
+        width: 80vw;
+        max-width: 600px;
+        background: white;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 5px 15px rgba(0,0,0,.5);
+        filter:none;
+    }
+
+    .overlay {
+        display: none;
+       /* position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.4);
+        z-index: 1000;*/
+    }
+    body.blurred > *:not(.overlay):not(#filterSection) {
+        
+        pointer-events: none;
+        user-select: none;
+    }
+
+    .col.d-flex.align-items-center {
+    flex-direction: column; /* Stack children vertically */
+}
+
+/* Styles for the bus-time divs */
+.bus-time {
+    display: flex;
+    align-items: center;
+    margin: 5px 0; /* Gives a bit of spacing between origin and destination */
+    width: 100%; /* Take full width of parent */
+    justify-content: center; /* Center the content */
+}
+
+/* Styles for the icons */
+.bus-time i {
+    
+    font-size: 20px; /* Adjust if you need the icon bigger or smaller */
+    margin-right: 10px; /* Spacing between icon and text */
+    
+}
+
+.la-location-arrow{
+    float: left;
+    position: relative;
+    margin-left: -6%;
+}
+
+/* Connector Icon */
+.connector-icon {
+    color: orange;
+    font-size: 25px; /* Adjust size as needed */
+    margin: -6px 0; 
+    float: left;
+    position: relative;
+    margin-left: 33%;
+}
+
+.buttonSection{
+    border-radius: 15px;
+}
+
+</style>
+
+
+
+
+<!-- Javascript for button -->
+
 @push('script')
 <script>
     (function($) {
         "use strict";
+
+        $('#filterToggleButton').on('click', function() {
+            $('body').toggleClass('blurred');
+            $('#filterSection').toggle();
+            if ($('#filterOverlay').length === 0) {
+                $('body').append('<div class="overlay" id="filterOverlay"></div>');
+            } else {
+                $('#filterOverlay').toggle();
+            }
+        });
+
+        $(document).on('click', '#filterOverlay', function() {
+            $('body').removeClass('blurred');
+            $('#filterSection').hide();
+            $('#filterOverlay').hide();
+        });
+
         $('.search').on('change', function() {
             $('#filterForm').submit();
         });
@@ -203,7 +325,9 @@ $counters = App\Models\Counter::get();
         $('.reset-button').on('click', function() {
             $('.search').attr('checked', false);
             $('#filterForm').submit();
-        })
+        });
     })(jQuery)
 </script>
 @endpush
+
+@endsection

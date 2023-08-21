@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12">
-                <div class="row justify-content-center g-4">
+                {{--<div class="row justify-content-center g-4">
                     @foreach ($blogs as $item)
                     <div class="col-lg-3 col-md-3 col-sm-10">
                         <div class="post-item">
@@ -25,7 +25,7 @@
                         </div>
                     </div>
                     @endforeach
-                </div>
+                </div>--}}
                 <ul class="pagination">
                     @if ($blogs->hasPages())
                         {{ paginateLinks($blogs) }}
