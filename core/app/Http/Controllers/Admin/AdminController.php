@@ -84,7 +84,7 @@ class AdminController extends Controller
         if ($request->hasFile('image')) {
             try {
                 $old = $user->image ?: null;
-                $user->image = uploadImage($request->image, imagePath()['profile']['admin']['path'], imagePath()['profile']['admin']['size'], $old);
+                $user->image = uploadImage($request->image, imagePath()['logo']['admin']['path'], imagePath()['profile']['admin']['size'], $old);
             } catch (\Exception $exp) {
                 $notify[] = ['error', 'Image could not be uploaded.'];
                 return back()->withNotify($notify);
@@ -144,7 +144,7 @@ class AdminController extends Controller
         $arr['app_name'] = systemDetails()['name'];
         $arr['app_url'] = env('APP_URL');
         $arr['purchase_code'] = env('PURCHASE_CODE');
-        $url = "https://license.viserlab.com/issue/get?".http_build_query($arr);
+        //$url = "https://license.viserlab.com/issue/get?".http_build_query($arr);
         $response = json_decode(curlContent($url));
         if ($response->status == 'error') {
             return redirect()->route('admin.dashboard')->withErrors($response->message);
@@ -159,7 +159,7 @@ class AdminController extends Controller
             'type'=>'required|in:bug,feature',
             'message'=>'required',
         ]);
-        $url = 'https://license.viserlab.com/issue/add';
+        //$url = 'https://license.viserlab.com/issue/add';
 
         $arr['app_name'] = systemDetails()['name'];
         $arr['app_url'] = env('APP_URL');

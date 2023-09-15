@@ -4,16 +4,16 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Easy Installer by ViserLab</title>
+	{{--<title>Easy Installer by ViserLab</title>--}}
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://license.viserlab.com/external/install.css">
+	{{--<link rel="stylesheet" href="https://license.viserlab.com/external/install.css">--}}
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
-	<link rel="shortcut icon" href="https://license.viserlab.com/external/favicon.png" type="image/x-icon">
+	{{--<link rel="shortcut icon" href="https://license.viserlab.com/external/favicon.png" type="image/x-icon">--}}
 </head>
 <body>
 	<header class="section-bg py-2 text-center">
 		<div class="container">
-			<h3 class="title">Easy Installer by ViserLab</h3>
+			{{--<h3 class="title">Easy Installer by ViserLab</h3>--}}
 		</div>
 	</header>
 	<div class="installation-section padding-bottom padding-top">
@@ -535,7 +535,7 @@ MIX_PUSHER_APP_CLUSTER='${PUSHER_APP_CLUSTER}'
 	</div>
 	<footer class="section-bg py-3 text-center">
 		<div class="container">
-			<p class="m-0 font-weight-bold">&copy;<?php echo Date('Y') ?> - All Right Reserved by <a href="https://viserlab.com/">ViserLab</a></p>
+			{{--<p class="m-0 font-weight-bold">&copy;<?php echo Date('Y') ?> - All Right Reserved by <a href="https://viserlab.com/">ViserLab</a></p>--}}
 		</div>
 	</footer>
 	<style>

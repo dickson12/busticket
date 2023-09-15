@@ -10,6 +10,7 @@
                             <thead>
                                 <tr>
                                     <th>@lang('Name')</th>
+                                    <th>@lang('Image')</th>
                                     <th>@lang('Seat Layout')</th>
                                     <th>@lang('No of Deck')</th>
                                     <th>@lang('Total Seat')</th>
@@ -23,6 +24,9 @@
                                 <tr>
                                     <td data-label="@lang('Name')">
                                         {{ __($item->name) }}
+                                    </td>
+                                    <td data-label="@lang('Image')">
+                                        {{ __($item->image) }}
                                     </td>
                                     <td data-label="@lang('Seat Layout')">
                                         {{ __($item->seat_layout) }}
@@ -104,7 +108,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ route('admin.fleet.type.store')}}" method="POST">
+                <form action="{{ route('admin.fleet.type.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
@@ -133,6 +137,22 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="form-group">
+                                    <div class="image-upload">
+                                        <div class="thumb">
+                                            <div class="avatar-preview">
+                                                <div class="profilePicPreview" style="background-image: url({{ getImage(imagePath()['profile']['admin']['path'].'/'.auth()->guard('admin')->user()->image,imagePath()['profile']['admin']['size']) }})">
+                                                    <button type="button" class="remove-image"><i class="fa fa-times"></i></button>
+                                                </div>
+                                            </div>
+                                            <div class="avatar-edit">
+                                                <input type="file" class="profilePicUpload" name="image" id="profilePicUpload1" accept=".png, .jpg, .jpeg">
+                                                <label for="profilePicUpload1" class="bg--success">@lang('Upload Image')</label>
+                                                <small class="mt-2 text-facebook">@lang('Supported files'): <b>@lang('jpeg'), @lang('jpg').</b> @lang('Image will be resized into 400x400px') </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                         <div class="form-group">
                             <label class="form-control-label font-weight-bold">@lang('AC status') </label>
                             <input type="checkbox" data-width="100%" data-onstyle="-success" data-offstyle="-danger"

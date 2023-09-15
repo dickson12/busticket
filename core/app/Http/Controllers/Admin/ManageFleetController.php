@@ -71,7 +71,18 @@ class ManageFleetController extends Controller
             'deck_seats.*.numeric'   => 'Seat number for all deck is must be a number',
             'deck_seats.*.gt:0'      => 'Seat number for all deck is must be greater than 0',
         ]);
+
         $fleetType = new FleetType();
+        if ($request->hasFile('image')) {
+            try {
+                $old = $fleetType->image ?: null;
+                $fleetType->image = uploadImage($request->image, imagePath()['logoIcon']['path'], null, $old);
+            } catch (\Exception $exp) {
+                $notify[] = ['error', 'Image could not be uploaded.'];
+                return back()->withNotify($notify);
+            }
+        }
+
         $fleetType->name = $request->name;
         $fleetType->seat_layout = $request->seat_layout;
         $fleetType->deck = $request->deck;

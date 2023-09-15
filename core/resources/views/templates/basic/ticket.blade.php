@@ -144,10 +144,11 @@ $counters = App\Models\Counter::get();
 
                     <div class="ticket-item d-flex align-items-center">
                         <div class="ticket-item-inner">
-                        <h5 class="bus-name">LOGO</h5>
-                            {{--<h5 class="bus-name">{{ __($trip->title) }}</h5>--}}
-                            {{--<span class="bus-info">@lang('Seat Layout - ') {{ __($trip->fleetType->seat_layout) }}</span>--}}
+                        <div class="logo mb-4">
+                            <img src="{{getImage(imagePath()['logoIcon']['path'] . '/'. $trip->fleetType->image)}}"  alt="Logo"></a>
                             <span class="ratting">{{--<i class="las la-bus"></i>--}}{{ __($trip->fleetType->name) }}</span>
+                        </div>
+                            
                         </div>
                         <div class="ticket-item-inner travel-time">
                             <div class="bus-time">
@@ -283,7 +284,7 @@ $counters = App\Models\Counter::get();
     margin: -6px 0; 
     float: left;
     position: relative;
-    margin-left: 33%;
+    margin-left: 50%;
 }
 
 .buttonSection{
